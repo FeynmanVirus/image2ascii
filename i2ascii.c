@@ -2,13 +2,9 @@
 #include <stdlib.h>
 #include "bmp.h"
 #include <string.h>
-#include <math.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
-
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image/stb_image_write.h"
 
 void ascii(int height, int width, RGBTRIPLE image[height][width], char array[height][width]);
 
@@ -16,7 +12,7 @@ int main(int argc, char *argv[])
 {
 	//Checking for valid usage
 	if (argc > 2 || argc < 2) {
-		printf("Usage: i2ascii [INPUT FILE] [OUTPUT FILE]");
+		printf("Usage: i2ascii [INPUT FILE]");
 		return 1;
 	}
 	char ascii[] = "`.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ";
@@ -39,8 +35,8 @@ int main(int argc, char *argv[])
 				unsigned char a = *pixels++;
 			}
 
-			float avgColors = (0.3*r + 0.6*g + 0.1*b) / 3.0f;
-			//float avgColors = (r + g + b) / 3.0f;
+			//float avgColors = (0.3*r + 0.6*g + 0.1*b) / 3.0f;
+			int avgColors = (r + g + b) / 3.0f;
 			int index = (int)(len * (avgColors/255.0f));
 
 			printf("%c", ascii[index]);
